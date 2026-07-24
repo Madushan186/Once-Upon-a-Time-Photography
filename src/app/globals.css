@@ -1,0 +1,38 @@
+@import "tailwindcss";
+
+@theme inline {
+  --color-cream: #F3EEE1;
+  --color-espresso: #6B5642;
+  --color-oat: #D8CBB4;
+  --color-taupe: #E8DCC6;
+  --color-wicker: #C7A374;
+  --color-clay: #B8875C;
+  --color-deep-espresso: #2E2015;
+
+  /* Map base elements to the new palette */
+  --color-background: var(--color-cream);
+  --color-foreground: var(--color-espresso);
+
+  --font-heading: var(--font-playfair);
+  --font-body: var(--font-inter);
+}
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    /* bg-transparent lets the fixed GlobalBackground beach layer show through all pages */
+    @apply bg-transparent text-foreground font-body antialiased;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-heading;
+  }
+}
