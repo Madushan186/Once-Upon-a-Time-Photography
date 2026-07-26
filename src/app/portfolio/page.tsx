@@ -6,7 +6,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import { portfolio } from "@/config/mediaConfig";
 
 // ─── Filter categories ────────────────────────────────────────────
-const FILTERS = ["All", "Maternity", "Newborn", "Family", "Milestones", "Birthdays"] as const;
+const FILTERS = ["All", "Maternity", "Newborn", "Family", "Milestones"] as const;
 type Filter = (typeof FILTERS)[number];
 
 // ─────────────────────────────────────────────────────────────────
@@ -44,11 +44,9 @@ const GALLERY = [
   { id: 18, category: "Milestones" as const, src: portfolio.milestones.gallery[1], alt: "Milestones gallery image 2" },
   { id: 19, category: "Milestones" as const, src: portfolio.milestones.gallery[2], alt: "Milestones gallery image 3" },
   { id: 20, category: "Milestones" as const, src: portfolio.milestones.gallery[3], alt: "Milestones gallery image 4" },
-  // ── Birthdays ───────────────────────────────────────────
-  { id: 21, category: "Birthdays" as const, src: portfolio.birthdays.cover,      alt: "Birthday celebration photography" },
-  { id: 22, category: "Birthdays" as const, src: portfolio.birthdays.gallery[0],  alt: "Birthday gallery image 1" },
-  { id: 23, category: "Birthdays" as const, src: portfolio.birthdays.gallery[1],  alt: "Birthday gallery image 2" },
-  { id: 24, category: "Birthdays" as const, src: portfolio.birthdays.gallery[2],  alt: "Birthday gallery image 3" },
+  { id: 21, category: "Milestones" as const, src: portfolio.milestones.gallery[4], alt: "Milestones gallery image 5" },
+  { id: 22, category: "Milestones" as const, src: portfolio.milestones.gallery[5], alt: "Milestones gallery image 6" },
+  { id: 23, category: "Milestones" as const, src: portfolio.milestones.gallery[6], alt: "Milestones gallery image 7" },
 ];
 
 // ─── Shared motion variants ───────────────────────────────────────

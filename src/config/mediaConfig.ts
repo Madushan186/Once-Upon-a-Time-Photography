@@ -101,17 +101,12 @@ export const siteMedia = {
       ],
     },
     milestones: {
-      cover:   "/images/portfolio/milestones/milestones-cover.jpg",
+      cover:   "/images/portfolio/milestones/milestones-cover-v2.jpg",
       gallery: [
         "/images/portfolio/milestones/milestones-1.jpg",
         "/images/portfolio/milestones/milestones-2.jpg",
         "/images/portfolio/milestones/milestones-3.jpg",
         "/images/portfolio/milestones/milestones-4.jpg",
-      ],
-    },
-    birthdays: {
-      cover:   "/images/portfolio/birthdays/birthday-cover.jpg",
-      gallery: [
         "/images/portfolio/birthdays/birthday-1.jpg",
         "/images/portfolio/birthdays/birthday-2.jpg",
         "/images/portfolio/birthdays/birthday-3.jpg",

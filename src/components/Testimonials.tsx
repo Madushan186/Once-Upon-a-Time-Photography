@@ -6,38 +6,50 @@ import { motion } from "framer-motion";
 const testimonials = [
   {
     quote:
-      "From the moment we arrived, everything felt comfortable and relaxed. There was no pressure to perform — just space to be ourselves.",
-    name: "Sarah",
+      "I got my family photos done by Ruvani and she have done amazing job. She is the best photographer in the town. She is very professional polite and friendly. Highly recommend.",
+    name: "Harpreet Kaur",
     session: "Family Session",
   },
   {
     quote:
-      "There is such a safe, warm and beautiful aura to every session. You feel instantly at ease, like you're among friends.",
-    name: "Felicity",
+      "I had completed a maternity shoot with Ruvani and had a very pleasant and warm experience. Ruvani was professional, kind and I felt comfortable with her suggested poses. Her editing skills are also very impressive, my final photos were sharp and exquisite.",
+    name: "Cristian A",
     session: "Maternity Session",
   },
   {
     quote:
-      "The photos captured exactly who we are. Gentle guidance, beautiful light, and memories we'll treasure for a lifetime.",
-    name: "James & Emma",
-    session: "Wedding Session",
-  },
-  {
-    quote:
-      "Absolutely magical! Ruvani has an incredible gift for catching those fleeting, authentic smiles that I thought were impossible to photograph.",
-    name: "Chloe",
-    session: "Newborn Session",
-  },
-  {
-    quote:
-      "The entire experience was seamless and joyous. The final gallery brought tears to my eyes. A true artist behind the lens.",
-    name: "Olivia & Mark",
+      "We had such a lovely experience with this family business for our baby’s cake smash photoshoot! She was so flexible and accommodating throughout the whole session and made everything feel easy and relaxed. The photos turned out beautiful.",
+    name: "Wathsala R",
     session: "Milestones Session",
   },
   {
     quote:
-      "I was so nervous about being in front of the camera, but she made me feel beautiful and empowered. The maternity photos are stunning.",
-    name: "Jessica",
+      "The service was so good and she is so humble and kind. She make sure your baby is comfortable and cozy.",
+    name: "Rubby Khan",
+    session: "Newborn Session",
+  },
+  {
+    quote:
+      "I am so glad that I got acquainted with Ruvani. She is a natural photographer. I was so pleased with my Maternity session and my son's cake smash shoot. She was instantly able to put my family at ease, and capture some captivating photos.",
+    name: "Mishu Sareen",
+    session: "Maternity & Milestones",
+  },
+  {
+    quote:
+      "Highly recommend!! I received my maternity photos today and I am beyond happy with how they turned out. Ruvani made us feel very comfortable and was patient and helpful throughout the photo shoot. You have done spectacular job.",
+    name: "Vaishnavi Wassvi",
+    session: "Maternity Session",
+  },
+  {
+    quote:
+      "Working with Ruvani was an absolute pleasure from start to finish. Her exceptional talent, professionalism, and dedication to her craft make her a standout choice in the world of photography. My family and I are so comfortable with Ruvani.",
+    name: "R Kaur",
+    session: "Family Session",
+  },
+  {
+    quote:
+      "We had our maternity photoshoot with Ruvani, she is quite humble, patient, dedicated and professional at work. Absolutely loved her photography and editing..will definitely recommend her.",
+    name: "Maddy Madhvi",
     session: "Maternity Session",
   },
 ];

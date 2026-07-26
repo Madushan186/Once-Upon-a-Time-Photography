@@ -34,13 +34,6 @@ const categories = [
     cover: portfolio.milestones.cover,
     gallery: portfolio.milestones.gallery,
   },
-  {
-    id: "birthdays",
-    title: "Birthday Celebrations",
-    subtitle: "Capturing the joy, laughter, and magic of another wonderful year.",
-    cover: portfolio.birthdays.cover,
-    gallery: portfolio.birthdays.gallery,
-  },
 ] as const;
 
 // ─── Component ───────────────────────────────────────────────────
@@ -69,7 +62,7 @@ export default function Portfolio() {
 
       {/* ── Category Grid ── */}
       <div className="mx-auto mt-20 max-w-[1400px] px-6">
-        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-5 lg:gap-8">
+        <div className="grid grid-cols-1 gap-12 sm:grid-cols-2 md:grid-cols-4 lg:gap-8">
           {categories.map((category) => (
             <button
               key={category.id}
