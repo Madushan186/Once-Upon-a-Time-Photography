@@ -9,15 +9,7 @@ import { portfolio } from "@/config/mediaConfig";
 // ─── Build the categories array from mediaConfig ─────────────────
 // This is the ONLY place you need to touch if you want to rename or
 // reorder categories. The images themselves live in mediaConfig.ts.
-interface Category {
-  id: string;
-  title: string;
-  subtitle?: string;
-  cover: string;
-  gallery: readonly string[];
-}
-
-const categories: Category[] = [
+const categories = [
   {
     id: "maternity",
     title: "Maternity",
@@ -33,6 +25,7 @@ const categories: Category[] = [
   {
     id: "family",
     title: "Family",
+    subtitle: "Because today's moments become tomorrow's most treasured memories.",
     cover: portfolio.family.cover,
     gallery: portfolio.family.gallery,
   },
@@ -42,7 +35,7 @@ const categories: Category[] = [
     cover: portfolio.milestones.cover,
     gallery: portfolio.milestones.gallery,
   },
-];
+] as const;
 
 // ─── Component ───────────────────────────────────────────────────
 export default function Portfolio() {
@@ -146,7 +139,7 @@ export default function Portfolio() {
                       animate={{ opacity: 1, y: 0 }}
                       transition={{
                         duration: 0.6,
-                        delay: idx * 0.1,
+                        delay: Math.min(idx * 0.05, 0.4),
                         ease: [0.22, 1, 0.36, 1],
                       }}
                     >

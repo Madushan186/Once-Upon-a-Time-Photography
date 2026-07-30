@@ -1,4 +1,5 @@
 import Image from "next/image";
+import { about } from "@/config/mediaConfig";
 
 export default function AboutExperience() {
   return (

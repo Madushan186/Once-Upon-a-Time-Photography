@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import { motion, useInView } from "framer-motion";
 import { useRef, FormEvent, useState } from "react";
 import { MapPin, Mail, Phone, ChevronDown, ArrowRight } from "lucide-react";
@@ -51,16 +52,11 @@ function FacebookSVG({ className }: { className?: string }) {
 }
 
 // ─── Contact details data ─────────────────────────────────────────
-const contactDetails: Array<{
-  Icon: React.ElementType;
-  label: string;
-  value: string;
-  href?: string;
-}> = [
-  { Icon: MapPin, label: "Location", value: "Pakenham, Victoria 3810" },
+const contactDetails = [
+  { Icon: MapPin, label: "Location", value: "Pakenham, Victoria 3810", href: undefined },
   { Icon: Mail,   label: "Email",    value: "niwanthi_r@hotmail.com",  href: "mailto:niwanthi_r@hotmail.com" },
   { Icon: Phone,  label: "Phone",    value: "0425 790 079",            href: "tel:+61425790079" },
-];
+] as const;
 
 // ─── Form input shared style ──────────────────────────────────────
 const field =

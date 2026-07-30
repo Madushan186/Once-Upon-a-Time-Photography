@@ -36,3 +36,29 @@
     @apply font-heading;
   }
 }
+
+/* ── Custom Editorial Beige Scrollbar ───────────────────────────── */
+html {
+  scrollbar-width: thin;
+  scrollbar-color: #D4C9B9 #F5F0E6;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #F5F0E6;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #D4C9B9;
+  border-radius: 9999px;
+  border: 2px solid #F5F0E6;
+  transition: background-color 0.3s ease;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background-color: #C2B4A3;
+}
