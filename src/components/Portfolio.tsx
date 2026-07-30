@@ -9,7 +9,15 @@ import { portfolio } from "@/config/mediaConfig";
 // ─── Build the categories array from mediaConfig ─────────────────
 // This is the ONLY place you need to touch if you want to rename or
 // reorder categories. The images themselves live in mediaConfig.ts.
-const categories = [
+interface Category {
+  id: string;
+  title: string;
+  subtitle?: string;
+  cover: string;
+  gallery: readonly string[];
+}
+
+const categories: Category[] = [
   {
     id: "maternity",
     title: "Maternity",
@@ -34,7 +42,7 @@ const categories = [
     cover: portfolio.milestones.cover,
     gallery: portfolio.milestones.gallery,
   },
-] as const;
+];
 
 // ─── Component ───────────────────────────────────────────────────
 export default function Portfolio() {
@@ -67,7 +75,7 @@ export default function Portfolio() {
             <button
               key={category.id}
               onClick={() => setSelectedId(category.id)}
-              className="group flex flex-col items-center text-center focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-espresso/40"
+              className="group flex flex-col items-center text-center transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-espresso/10 rounded-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-4 focus-visible:outline-espresso/40"
               aria-label={`View ${category.title} gallery`}
             >
               <div className="relative aspect-[3/4] w-full overflow-hidden rounded-sm bg-espresso/5">

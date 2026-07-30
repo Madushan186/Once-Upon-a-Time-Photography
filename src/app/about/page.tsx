@@ -146,7 +146,7 @@ export default function AboutPage() {
 
             <FadeUp delay={0.2} className="mt-7">
               <p className="font-body text-base leading-loose text-espresso/70 md:text-[1.05rem]">
-                Photography is so much more than taking beautiful pictures, it's
+                Photography is so much more than taking beautiful pictures, it&apos;s
                 about preserving genuine connections, real emotions, and the
                 moments that tell your family&apos;s story. My style is natural,
                 relaxed, and timeless. I love using beautiful natural light to
@@ -164,6 +164,20 @@ export default function AboutPage() {
                 pregnancy, welcoming a newborn, gathering your family together,
                 or marking a special milestone, I would be honoured to capture
                 this chapter of your story.
+              </p>
+            </FadeUp>
+
+            {/* ── Investment ── */}
+            <FadeUp delay={0.22} className="mt-14">
+              <h3 className="font-heading text-2xl font-normal tracking-tight text-espresso md:text-3xl">
+                The Investment
+              </h3>
+              <div className="mt-3 h-px w-8 bg-oat" />
+            </FadeUp>
+
+            <FadeUp delay={0.24} className="mt-7">
+              <p className="font-body text-base leading-loose text-espresso/70 md:text-[1.05rem]">
+                I believe in transparent and simple pricing. The session fee is <strong>$300</strong>, which includes my time, talent, and <strong>20 high-resolution digital images</strong> professionally edited and delivered via a private online gallery. A <strong>$50</strong> booking fee is required to secure your date, which is deducted from your final balance.
               </p>
             </FadeUp>
 

@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Image from "next/image";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion, AnimatePresence, Variants } from "framer-motion";
 import { portfolio } from "@/config/mediaConfig";
 
 // ─── Filter categories ────────────────────────────────────────────
@@ -21,36 +21,41 @@ type Filter = (typeof FILTERS)[number];
 // ─────────────────────────────────────────────────────────────────
 const GALLERY = [
   // ── Maternity ────────────────────────────────────────────
-  { id: 1,  category: "Maternity" as const, src: portfolio.maternity.cover,      alt: "Maternity photography session" },
-  { id: 2,  category: "Maternity" as const, src: portfolio.maternity.gallery[0],  alt: "Maternity gallery image 1" },
-  { id: 3,  category: "Maternity" as const, src: portfolio.maternity.gallery[1],  alt: "Maternity gallery image 2" },
-  { id: 4,  category: "Maternity" as const, src: portfolio.maternity.gallery[2],  alt: "Maternity gallery image 3" },
-  { id: 5,  category: "Maternity" as const, src: portfolio.maternity.gallery[3],  alt: "Maternity gallery image 4" },
+  { id: 1, category: "Maternity" as const, src: portfolio.maternity.cover, alt: "Maternity photography session" },
+  ...portfolio.maternity.gallery.map((src, i) => ({
+    id: 100 + i,
+    category: "Maternity" as const,
+    src,
+    alt: `Maternity gallery image ${i + 1}`,
+  })),
   // ── Newborn ─────────────────────────────────────────────
-  { id: 6,  category: "Newborn"  as const, src: portfolio.newborn.cover,         alt: "Newborn photography session" },
-  { id: 7,  category: "Newborn"  as const, src: portfolio.newborn.gallery[0],     alt: "Newborn gallery image 1" },
-  { id: 8,  category: "Newborn"  as const, src: portfolio.newborn.gallery[1],     alt: "Newborn gallery image 2" },
-  { id: 9,  category: "Newborn"  as const, src: portfolio.newborn.gallery[2],     alt: "Newborn gallery image 3" },
-  { id: 10, category: "Newborn"  as const, src: portfolio.newborn.gallery[3],     alt: "Newborn gallery image 4" },
+  { id: 6, category: "Newborn" as const, src: portfolio.newborn.cover, alt: "Newborn photography session" },
+  ...portfolio.newborn.gallery.map((src, i) => ({
+    id: 200 + i,
+    category: "Newborn" as const,
+    src,
+    alt: `Newborn gallery image ${i + 1}`,
+  })),
   // ── Family ──────────────────────────────────────────────
-  { id: 11, category: "Family"   as const, src: portfolio.family.cover,          alt: "Family photography session" },
-  { id: 12, category: "Family"   as const, src: portfolio.family.gallery[0],      alt: "Family gallery image 1" },
-  { id: 13, category: "Family"   as const, src: portfolio.family.gallery[1],      alt: "Family gallery image 2" },
-  { id: 14, category: "Family"   as const, src: portfolio.family.gallery[2],      alt: "Family gallery image 3" },
-  { id: 15, category: "Family"   as const, src: portfolio.family.gallery[3],      alt: "Family gallery image 4" },
+  { id: 11, category: "Family" as const, src: portfolio.family.cover, alt: "Family photography session" },
+  ...portfolio.family.gallery.map((src, i) => ({
+    id: 300 + i,
+    category: "Family" as const,
+    src,
+    alt: `Family gallery image ${i + 1}`,
+  })),
   // ── Milestones ─────────────────────────────────────────
-  { id: 16, category: "Milestones" as const, src: portfolio.milestones.cover,     alt: "Milestone photography session" },
-  { id: 17, category: "Milestones" as const, src: portfolio.milestones.gallery[0], alt: "Milestones gallery image 1" },
-  { id: 18, category: "Milestones" as const, src: portfolio.milestones.gallery[1], alt: "Milestones gallery image 2" },
-  { id: 19, category: "Milestones" as const, src: portfolio.milestones.gallery[2], alt: "Milestones gallery image 3" },
-  { id: 20, category: "Milestones" as const, src: portfolio.milestones.gallery[3], alt: "Milestones gallery image 4" },
-  { id: 21, category: "Milestones" as const, src: portfolio.milestones.gallery[4], alt: "Milestones gallery image 5" },
-  { id: 22, category: "Milestones" as const, src: portfolio.milestones.gallery[5], alt: "Milestones gallery image 6" },
-  { id: 23, category: "Milestones" as const, src: portfolio.milestones.gallery[6], alt: "Milestones gallery image 7" },
+  { id: 16, category: "Milestones" as const, src: portfolio.milestones.cover, alt: "Milestone photography session" },
+  ...portfolio.milestones.gallery.map((src, i) => ({
+    id: 400 + i,
+    category: "Milestones" as const,
+    src,
+    alt: `Milestones gallery image ${i + 1}`,
+  })),
 ];
 
 // ─── Shared motion variants ───────────────────────────────────────
-const itemVariants = {
+const itemVariants: Variants = {
   hidden:  { opacity: 0, scale: 0.92 },
   visible: { opacity: 1, scale: 1,   transition: { duration: 0.45, ease: [0.22, 1, 0.36, 1] } },
   exit:    { opacity: 0, scale: 0.90, transition: { duration: 0.25, ease: "easeIn" } },

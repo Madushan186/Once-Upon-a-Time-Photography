@@ -88,7 +88,7 @@ export default function Testimonials() {
                 aria-hidden
               />
               <blockquote className="font-body text-base leading-loose text-espresso/75 md:text-[1.05rem]">
-                "{testimonial.quote}"
+                &quot;{testimonial.quote}&quot;
               </blockquote>
               <div className="mt-8 flex flex-col items-center">
                 <div className="mb-3 h-px w-6 bg-wicker" />

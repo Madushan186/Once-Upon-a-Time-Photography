@@ -61,13 +61,13 @@ export default function Hero() {
         ══════════════════════════════════════════════════════════ */}
         <div className="relative z-20 flex w-full max-w-5xl flex-col items-center px-6 text-center">
           <motion.div
-            className="mb-8 rounded-full bg-espresso/40 px-6 py-2 backdrop-blur-md ring-1 ring-cream/20"
+            className="mb-8 rounded-full bg-cream/95 px-8 py-2.5 shadow-xl backdrop-blur-md ring-1 ring-espresso/10"
             initial={{ opacity: 0, y: 15 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, delay: 0.2, ease: "easeOut" }}
           >
-            <p className="font-body text-[0.65rem] font-medium uppercase tracking-[0.4em] text-cream drop-shadow-sm">
-              specialising in newborn <span className="mx-1 opacity-60">|</span> family <span className="mx-1 opacity-60">|</span> maternity
+            <p className="font-body text-[0.7rem] font-semibold uppercase tracking-[0.35em] text-espresso">
+              specialising in newborn <span className="mx-1 text-espresso/30">|</span> family <span className="mx-1 text-espresso/30">|</span> maternity
             </p>
           </motion.div>
 

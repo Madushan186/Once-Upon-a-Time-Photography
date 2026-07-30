@@ -1,5 +1,4 @@
 import Image from "next/image";
-import { about } from "@/config/mediaConfig";
 
 export default function AboutExperience() {
   return (
@@ -25,12 +24,21 @@ export default function AboutExperience() {
           </p>
         </div>
 
-        <div className="relative aspect-[3/4] w-full max-w-md justify-self-center overflow-hidden md:max-w-none md:justify-self-end">
+        <div className="group relative aspect-[3/4] w-full max-w-md justify-self-center overflow-hidden md:max-w-none md:justify-self-end">
+          {/* Base image (shows when NOT hovering) */}
           <Image
-            src={about.profileImage}
+            src="/images/about/ruvani-profile-1.jpg"
             alt="Portrait of Ruvani, photographer"
             fill
-            className="object-cover object-top"
+            className="object-cover object-top transition-opacity duration-500 ease-in-out group-hover:opacity-0"
+            sizes="(max-width: 768px) 100vw, 50vw"
+          />
+          {/* Hover image (shows on hover) */}
+          <Image
+            src="/images/about/ruvani-profile-2.jpg"
+            alt="Smiling portrait of Ruvani"
+            fill
+            className="absolute inset-0 object-cover object-top opacity-0 transition-opacity duration-500 ease-in-out group-hover:opacity-100"
             sizes="(max-width: 768px) 100vw, 50vw"
           />
         </div>

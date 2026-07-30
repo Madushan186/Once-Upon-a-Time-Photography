@@ -76,7 +76,7 @@ export default function StrengthAndCourage() {
             </div>
 
             <p className="font-heading mt-10 text-lg italic text-espresso/90">
-              "It is truly an honour to be trusted with your story. I look forward to creating beautiful images that reflect your courage, resilience, and the person you are beyond cancer."
+              &quot;It is truly an honour to be trusted with your story. I look forward to creating beautiful images that reflect your courage, resilience, and the person you are beyond cancer.&quot;
             </p>
 
             <div className="mt-12">
