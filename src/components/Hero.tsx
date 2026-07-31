@@ -1,12 +1,25 @@
 "use client";
 
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import Link from "next/link";
-import { motion, useReducedMotion } from "framer-motion";
+import { motion, AnimatePresence, useReducedMotion } from "framer-motion";
 import { hero } from "@/config/mediaConfig";
 
 export default function Hero() {
   const prefersReducedMotion = useReducedMotion() ?? false;
+  const [currentSlideIndex, setCurrentSlideIndex] = useState(0);
+
+  const slides = hero.slides || [hero.background];
+
+  // Rotate hero background images every 7 seconds
+  useEffect(() => {
+    if (slides.length <= 1) return;
+    const interval = setInterval(() => {
+      setCurrentSlideIndex((prevIndex) => (prevIndex + 1) % slides.length);
+    }, 7000);
+    return () => clearInterval(interval);
+  }, [slides.length]);
 
   return (
     <>
@@ -16,35 +29,35 @@ export default function Hero() {
         className="relative flex min-h-screen w-full flex-col items-center justify-end pb-32 overflow-hidden"
       >
         {/* ══════════════════════════════════════════════════════════
-            IMAGE LAYER
-            Ultra-slow scaling effect (30s loop) for a breathing feel.
+            IMAGE SLIDESHOW LAYER WITH CONTINUOUS CINEMATIC ZOOM
         ══════════════════════════════════════════════════════════ */}
-        <motion.div
-          className="absolute inset-0 z-0"
-          initial={{ opacity: 0, scale: 1 }}
-          animate={
-            prefersReducedMotion
-              ? { opacity: 1, scale: 1 }
-              : { opacity: 1, scale: [1, 1.05, 1] }
-          }
-          transition={
-            prefersReducedMotion
-              ? { duration: 1 }
-              : { duration: 30, repeat: Infinity, ease: "linear" }
-          }
-        >
-          <Image
-            src={hero.background}
-            alt="Artful family and newborn photography background"
-            fill
-            priority
-            quality={90}
-            className="object-cover object-center"
-            sizes="100vw"
-          />
-        </motion.div>
-
-
+        <AnimatePresence mode="popLayout">
+          <motion.div
+            key={slides[currentSlideIndex]}
+            className="absolute inset-0 z-0"
+            initial={{ opacity: 0, scale: 1 }}
+            animate={
+              prefersReducedMotion
+                ? { opacity: 1, scale: 1 }
+                : { opacity: 1, scale: [1, 1.06, 1] }
+            }
+            exit={{ opacity: 0 }}
+            transition={{
+              opacity: { duration: 2, ease: "easeInOut" },
+              scale: { duration: 30, repeat: Infinity, ease: "easeInOut" },
+            }}
+          >
+            <Image
+              src={slides[currentSlideIndex]}
+              alt="Beautiful cinematic photography hero background"
+              fill
+              priority
+              quality={90}
+              className="object-cover object-center"
+              sizes="100vw"
+            />
+          </motion.div>
+        </AnimatePresence>
 
         {/* ══════════════════════════════════════════════════════════
             REFINED BOTTOM VIGNETTE
