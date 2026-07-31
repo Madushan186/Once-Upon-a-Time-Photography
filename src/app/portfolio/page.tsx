@@ -1,52 +1,64 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
+import { X } from "lucide-react";
 import { portfolio } from "@/config/mediaConfig";
 
+// ─── Build the category cards array ──────────────────────────────
+const categories = [
+  {
+    id: "maternity",
+    title: "Maternity",
+    cover: portfolio.maternity.cover,
+    gallery: portfolio.maternity.gallery,
+  },
+  {
+    id: "newborn",
+    title: "Newborn",
+    cover: portfolio.newborn.cover,
+    gallery: portfolio.newborn.gallery,
+  },
+  {
+    id: "family",
+    title: "Family",
+    subtitle: "Because today's moments become tomorrow's most treasured memories.",
+    cover: portfolio.family.cover,
+    gallery: portfolio.family.gallery,
+  },
+  {
+    id: "milestones",
+    title: "Milestones",
+    cover: portfolio.milestones.cover,
+    gallery: portfolio.milestones.gallery,
+  },
+] as const;
+
 // ─── Filter categories ────────────────────────────────────────────
-const FILTERS = ["All", "Maternity", "Newborn", "Family", "Milestones"] as const;
+const FILTERS = ["Maternity", "Newborn", "Family", "Milestones"] as const;
 type Filter = (typeof FILTERS)[number];
 
-// ─────────────────────────────────────────────────────────────────
-//  GALLERY  —  single source of truth for all portfolio images
-//
-//  HOW TO ADD MORE PHOTOS:
-//  1. Copy your .jpg into the matching /public/images/portfolio/<category>/ folder.
-//  2. Add its path to the correct gallery[] array in mediaConfig.ts.
-//  3. Append a new object here, e.g.:
-//     { id: 20, category: "Maternity", src: portfolio.maternity.gallery[4], alt: "..." }
-//  That’s it — the masonry grid and filter update automatically.
-// ─────────────────────────────────────────────────────────────────
+// ─── Dynamic Full Gallery ─────────────────────────────────────────
+const buildCategoryImages = (
+  category: "Maternity" | "Newborn" | "Family" | "Milestones",
+  cover: string,
+  gallery: readonly string[]
+) => {
+  const allSources = gallery.includes(cover) ? [...gallery] : [cover, ...gallery];
+  return allSources.map((src, i) => ({
+    id: `${category.toLowerCase()}-${i + 1}`,
+    category,
+    src,
+    alt: `${category} gallery image ${i + 1}`,
+  }));
+};
+
 const GALLERY = [
-  // ── Maternity ────────────────────────────────────────────
-  { id: 1,  category: "Maternity" as const, src: portfolio.maternity.cover,      alt: "Maternity photography session" },
-  { id: 2,  category: "Maternity" as const, src: portfolio.maternity.gallery[0],  alt: "Maternity gallery image 1" },
-  { id: 3,  category: "Maternity" as const, src: portfolio.maternity.gallery[1],  alt: "Maternity gallery image 2" },
-  { id: 4,  category: "Maternity" as const, src: portfolio.maternity.gallery[2],  alt: "Maternity gallery image 3" },
-  { id: 5,  category: "Maternity" as const, src: portfolio.maternity.gallery[3],  alt: "Maternity gallery image 4" },
-  // ── Newborn ─────────────────────────────────────────────
-  { id: 6,  category: "Newborn"  as const, src: portfolio.newborn.cover,         alt: "Newborn photography session" },
-  { id: 7,  category: "Newborn"  as const, src: portfolio.newborn.gallery[0],     alt: "Newborn gallery image 1" },
-  { id: 8,  category: "Newborn"  as const, src: portfolio.newborn.gallery[1],     alt: "Newborn gallery image 2" },
-  { id: 9,  category: "Newborn"  as const, src: portfolio.newborn.gallery[2],     alt: "Newborn gallery image 3" },
-  { id: 10, category: "Newborn"  as const, src: portfolio.newborn.gallery[3],     alt: "Newborn gallery image 4" },
-  // ── Family ──────────────────────────────────────────────
-  { id: 11, category: "Family"   as const, src: portfolio.family.cover,          alt: "Family photography session" },
-  { id: 12, category: "Family"   as const, src: portfolio.family.gallery[0],      alt: "Family gallery image 1" },
-  { id: 13, category: "Family"   as const, src: portfolio.family.gallery[1],      alt: "Family gallery image 2" },
-  { id: 14, category: "Family"   as const, src: portfolio.family.gallery[2],      alt: "Family gallery image 3" },
-  { id: 15, category: "Family"   as const, src: portfolio.family.gallery[3],      alt: "Family gallery image 4" },
-  // ── Milestones ─────────────────────────────────────────
-  { id: 16, category: "Milestones" as const, src: portfolio.milestones.cover,     alt: "Milestone photography session" },
-  { id: 17, category: "Milestones" as const, src: portfolio.milestones.gallery[0], alt: "Milestones gallery image 1" },
-  { id: 18, category: "Milestones" as const, src: portfolio.milestones.gallery[1], alt: "Milestones gallery image 2" },
-  { id: 19, category: "Milestones" as const, src: portfolio.milestones.gallery[2], alt: "Milestones gallery image 3" },
-  { id: 20, category: "Milestones" as const, src: portfolio.milestones.gallery[3], alt: "Milestones gallery image 4" },
-  { id: 21, category: "Milestones" as const, src: portfolio.milestones.gallery[4], alt: "Milestones gallery image 5" },
-  { id: 22, category: "Milestones" as const, src: portfolio.milestones.gallery[5], alt: "Milestones gallery image 6" },
-  { id: 23, category: "Milestones" as const, src: portfolio.milestones.gallery[6], alt: "Milestones gallery image 7" },
+  ...buildCategoryImages("Maternity", portfolio.maternity.cover, portfolio.maternity.gallery),
+  ...buildCategoryImages("Newborn", portfolio.newborn.cover, portfolio.newborn.gallery),
+  ...buildCategoryImages("Family", portfolio.family.cover, portfolio.family.gallery),
+  ...buildCategoryImages("Milestones", portfolio.milestones.cover, portfolio.milestones.gallery),
 ];
 
 // ─── Shared motion variants ───────────────────────────────────────
@@ -56,13 +68,19 @@ const itemVariants = {
   exit:    { opacity: 0, scale: 0.90, transition: { duration: 0.25, ease: "easeIn" as const } },
 };
 
-// ─── Page ─────────────────────────────────────────────────────────
 export default function PortfolioPage() {
-  const [active, setActive] = useState<Filter>("All");
+  const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [activeFilter, setActiveFilter] = useState<Filter>("Maternity");
 
-  const filtered = active === "All"
-    ? GALLERY
-    : GALLERY.filter((img) => img.category === active);
+  const activeModalCategory = categories.find((c) => c.id === selectedId);
+
+  // Lock background scroll while modal is open
+  useEffect(() => {
+    document.body.style.overflow = selectedId ? "hidden" : "auto";
+    return () => { document.body.style.overflow = "auto"; };
+  }, [selectedId]);
+
+  const filteredImages = GALLERY.filter((img) => img.category === activeFilter);
 
   return (
     <main className="min-h-screen bg-cream pt-32 pb-24 px-4 md:px-12">
@@ -105,28 +123,27 @@ export default function PortfolioPage() {
         />
       </div>
 
-      {/* ── Filter navigation ── */}
+      {/* ── Filter navigation (4 Core Categories ONLY) ── */}
       <motion.nav
-        className="mx-auto mt-14 flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-3"
+        className="mx-auto mt-12 flex max-w-7xl flex-wrap items-center justify-center gap-x-8 gap-y-3"
         aria-label="Portfolio filter"
         initial={{ opacity: 0, y: 8 }}
         animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.6, delay: 0.35 }}
       >
         {FILTERS.map((filter) => {
-          const isActive = filter === active;
+          const isActive = filter === activeFilter;
           return (
             <button
               key={filter}
-              onClick={() => setActive(filter)}
-              className={`font-body relative pb-1.5 text-[0.72rem] uppercase tracking-[0.3em] transition-all duration-300 ${
+              onClick={() => setActiveFilter(filter)}
+              className={`font-body relative pb-1.5 text-[0.75rem] uppercase tracking-[0.3em] transition-all duration-300 ${
                 isActive
-                  ? "font-medium text-wicker"
-                  : "text-espresso/50 hover:text-espresso/80"
+                  ? "font-semibold text-wicker"
+                  : "text-espresso/60 hover:text-espresso/90"
               }`}
             >
               {filter}
-              {/* Animated underline */}
               <motion.span
                 className="absolute bottom-0 left-0 h-[1.5px] w-full bg-wicker"
                 initial={false}
@@ -141,13 +158,12 @@ export default function PortfolioPage() {
 
       {/* ── Masonry grid ── */}
       <div className="mx-auto mt-14 max-w-7xl">
-        {/* CSS Columns masonry */}
         <motion.div
           layout
           className="columns-1 gap-5 sm:columns-2 lg:columns-3 [column-fill:_balance]"
         >
           <AnimatePresence mode="popLayout">
-            {filtered.map((img) => (
+            {filteredImages.map((img) => (
               <motion.div
                 key={img.id}
                 layout
@@ -155,9 +171,9 @@ export default function PortfolioPage() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                className="group mb-5 break-inside-avoid overflow-hidden rounded-sm bg-espresso/5"
+                onClick={() => setSelectedId(img.category.toLowerCase())}
+                className="group mb-5 break-inside-avoid overflow-hidden rounded-sm bg-espresso/5 cursor-pointer"
               >
-                {/* Image with hover overlay */}
                 <div className="relative w-full overflow-hidden">
                   <Image
                     src={img.src}
@@ -167,11 +183,8 @@ export default function PortfolioPage() {
                     className="h-auto w-full object-cover transition-transform duration-700 ease-out group-hover:scale-[1.04]"
                     sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
                   />
-                  {/* Soft hover overlay */}
                   <div className="pointer-events-none absolute inset-0 bg-cream/0 transition-all duration-500 group-hover:bg-cream/10" />
                 </div>
-
-                {/* Category tag on hover */}
                 <div className="overflow-hidden">
                   <motion.p
                     className="font-body px-4 py-3 text-[0.58rem] uppercase tracking-[0.3em] text-espresso/40 opacity-0 transition-opacity duration-300 group-hover:opacity-100"
@@ -184,8 +197,7 @@ export default function PortfolioPage() {
           </AnimatePresence>
         </motion.div>
 
-        {/* Empty state */}
-        {filtered.length === 0 && (
+        {filteredImages.length === 0 && (
           <div className="py-24 text-center">
             <p className="font-body text-sm text-espresso/40">
               No images in this category yet.
@@ -193,6 +205,59 @@ export default function PortfolioPage() {
           </div>
         )}
       </div>
+
+      {/* ── Interactive Category Modal ── */}
+      <AnimatePresence>
+        {selectedId && activeModalCategory && (
+          <motion.div
+            className="fixed inset-0 z-50 flex items-center justify-center bg-cream/90 p-4 backdrop-blur-md md:p-8"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.4 }}
+          >
+            <button
+              onClick={() => setSelectedId(null)}
+              className="absolute right-6 top-6 z-50 flex h-12 w-12 items-center justify-center rounded-full bg-taupe/80 text-espresso shadow-sm backdrop-blur-sm transition-all hover:scale-105 hover:bg-taupe focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-espresso/40"
+              aria-label="Close gallery"
+            >
+              <X strokeWidth={1.5} className="h-6 w-6" />
+            </button>
+
+            <div className="relative h-full w-full max-w-7xl overflow-y-auto rounded-xl">
+              <div className="mx-auto max-w-6xl py-12 md:py-20">
+                <h3 className="font-heading mb-12 text-center text-4xl text-espresso md:text-5xl lg:mb-20">
+                  {activeModalCategory.title}
+                </h3>
+                <div className="columns-1 gap-6 space-y-6 sm:columns-2 md:columns-3 lg:gap-8 lg:space-y-8">
+                  {activeModalCategory.gallery.map((img, idx) => (
+                    <motion.div
+                      key={img}
+                      className="relative overflow-hidden rounded-md bg-espresso/5"
+                      initial={{ opacity: 0, y: 30 }}
+                      animate={{ opacity: 1, y: 0 }}
+                      transition={{
+                        duration: 0.6,
+                        delay: Math.min(idx * 0.05, 0.4),
+                        ease: [0.22, 1, 0.36, 1],
+                      }}
+                    >
+                      <Image
+                        src={img}
+                        alt={`${activeModalCategory.title} gallery image ${idx + 1}`}
+                        width={800}
+                        height={1200}
+                        className="h-auto w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+                        sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
+                      />
+                    </motion.div>
+                  ))}
+                </div>
+              </div>
+            </div>
+          </motion.div>
+        )}
+      </AnimatePresence>
 
     </main>
   );

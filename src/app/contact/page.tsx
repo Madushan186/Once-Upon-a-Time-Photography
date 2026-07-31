@@ -72,7 +72,7 @@ export default function ContactPage() {
   }
 
   return (
-    <main className="min-h-screen bg-[cream] pt-24 pb-32">
+    <main className="min-h-screen bg-[cream] pt-36 md:pt-44 pb-32">
       {/* ── Page header ── */}
       <div className="mx-auto max-w-7xl px-8 md:px-16">
         <FadeUp>
@@ -154,7 +154,7 @@ export default function ContactPage() {
               </p>
               <div className="mt-5 flex items-center gap-4">
                 <a
-                  href="https://instagram.com"
+                  href="https://www.instagram.com/once_upon_a_time_by_ruvani/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Instagram"
@@ -163,7 +163,7 @@ export default function ContactPage() {
                   <InstagramSVG className="h-4 w-4" />
                 </a>
                 <a
-                  href="https://facebook.com"
+                  href="https://www.facebook.com/share/1EeMPewn3v/"
                   target="_blank"
                   rel="noopener noreferrer"
                   aria-label="Facebook"

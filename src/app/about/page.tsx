@@ -35,7 +35,7 @@ function FadeUp({
 // ─── Page ─────────────────────────────────────────────────────────
 export default function AboutPage() {
   return (
-    <main className="bg-background min-h-screen pt-24 pb-32">
+    <main className="bg-background min-h-screen pt-36 md:pt-44 pb-32">
       {/* ── Page header ── */}
       <div className="mx-auto max-w-6xl px-6 md:px-12">
         <FadeUp>
