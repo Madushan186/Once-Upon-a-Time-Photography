@@ -99,7 +99,7 @@ export default function Hero() {
           QUICK INTRO SECTION
           Seamlessly follows the hero, keeping the premium editorial feel.
       ══════════════════════════════════════════════════════════ */}
-      <section className="w-full bg-cream py-24 px-6 relative z-20 flex flex-col items-center text-center">
+      <section className="w-full bg-cream pt-20 pb-16 px-6 relative z-20 flex flex-col items-center text-center">
         <div className="max-w-2xl">
           <motion.h2 
             className="font-heading text-2xl md:text-3xl text-espresso mb-6 font-normal"
@@ -112,7 +112,7 @@ export default function Hero() {
           </motion.h2>
           
           <motion.p 
-            className="font-body text-espresso/80 text-sm md:text-base leading-relaxed mb-16"
+            className="font-body text-espresso/80 text-sm md:text-base leading-relaxed"
             initial={{ opacity: 0, y: 20 }}
             whileInView={{ opacity: 1, y: 0 }}
             viewport={{ once: true, margin: "-100px" }}
@@ -122,22 +122,14 @@ export default function Hero() {
           </motion.p>
         </div>
 
-        {/* Minimalist category menu */}
+        {/* Minimalist Muted Taupe divider */}
         <motion.div 
-          className="flex flex-wrap justify-center gap-x-8 gap-y-4 font-body text-[0.65rem] uppercase tracking-[0.4em] text-espresso/70"
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
+          className="mx-auto mt-12 h-px w-10 bg-wicker/60"
+          initial={{ opacity: 0, scaleX: 0 }}
+          whileInView={{ opacity: 1, scaleX: 1 }}
           viewport={{ once: true }}
-          transition={{ duration: 1, delay: 0.4 }}
-        >
-          <Link href="/portfolio#maternity" className="hover:text-espresso transition-colors duration-300">m a t e r n i t y</Link>
-          <span className="opacity-40">|</span>
-          <Link href="/portfolio#newborn" className="hover:text-espresso transition-colors duration-300">n e w b o r n</Link>
-          <span className="opacity-40">|</span>
-          <Link href="/portfolio#family" className="hover:text-espresso transition-colors duration-300">f a m i l y</Link>
-          <span className="opacity-40">|</span>
-          <Link href="/portfolio#birthdays" className="hover:text-espresso transition-colors duration-300">b i r t h d a y s</Link>
-        </motion.div>
+          transition={{ duration: 0.8, delay: 0.4 }}
+        />
       </section>
     </>
   );

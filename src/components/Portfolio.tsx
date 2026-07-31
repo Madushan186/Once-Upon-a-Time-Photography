@@ -13,12 +13,14 @@ const categories = [
   {
     id: "maternity",
     title: "Maternity",
+    subtitle: "Embracing the beauty of new beginnings and the miracle of motherhood.",
     cover: portfolio.maternity.cover,
     gallery: portfolio.maternity.gallery,
   },
   {
     id: "newborn",
     title: "Newborn",
+    subtitle: "Capturing the fleeting tenderness of your baby's very first days.",
     cover: portfolio.newborn.cover,
     gallery: portfolio.newborn.gallery,
   },
@@ -32,6 +34,7 @@ const categories = [
   {
     id: "milestones",
     title: "Milestones",
+    subtitle: "Preserving the joyful steps, laughter, and wonder of every growing age.",
     cover: portfolio.milestones.cover,
     gallery: portfolio.milestones.gallery,
   },
@@ -91,11 +94,9 @@ export default function Portfolio() {
               <h3 className="font-heading mt-6 text-xl font-normal lowercase tracking-wide text-espresso transition-colors group-hover:text-espresso/70">
                 {category.title}
               </h3>
-              {"subtitle" in category && category.subtitle && (
-                <p className="font-body mt-2 text-[0.65rem] leading-relaxed text-espresso/50">
-                  {category.subtitle}
-                </p>
-              )}
+              <p className="font-body mt-2.5 max-w-[260px] text-xs leading-relaxed text-espresso/70 text-center">
+                {category.subtitle}
+              </p>
             </button>
           ))}
         </div>
