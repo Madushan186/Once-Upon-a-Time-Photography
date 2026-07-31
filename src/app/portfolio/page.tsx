@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { portfolio } from "@/config/mediaConfig";
+import ImageLightbox from "@/components/ImageLightbox";
 
 // ─── Build the category cards array ──────────────────────────────
 const categories = [
@@ -71,14 +72,15 @@ const itemVariants = {
 export default function PortfolioPage() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
   const [activeFilter, setActiveFilter] = useState<Filter>("Maternity");
+  const [zoomImage, setZoomImage] = useState<{ src: string; alt: string } | null>(null);
 
   const activeModalCategory = categories.find((c) => c.id === selectedId);
 
   // Lock background scroll while modal is open
   useEffect(() => {
-    document.body.style.overflow = selectedId ? "hidden" : "auto";
+    document.body.style.overflow = selectedId || zoomImage ? "hidden" : "auto";
     return () => { document.body.style.overflow = "auto"; };
-  }, [selectedId]);
+  }, [selectedId, zoomImage]);
 
   const filteredImages = GALLERY.filter((img) => img.category === activeFilter);
 
@@ -171,7 +173,7 @@ export default function PortfolioPage() {
                 initial="hidden"
                 animate="visible"
                 exit="exit"
-                onClick={() => setSelectedId(img.category.toLowerCase())}
+                onClick={() => setZoomImage({ src: img.src, alt: img.alt })}
                 className="group mb-5 break-inside-avoid overflow-hidden rounded-sm bg-espresso/5 cursor-pointer"
               >
                 <div className="relative w-full overflow-hidden">
@@ -233,9 +235,10 @@ export default function PortfolioPage() {
                   {activeModalCategory.gallery.map((img, idx) => (
                     <motion.div
                       key={img}
-                      className="relative overflow-hidden rounded-md bg-espresso/5"
+                      className="relative overflow-hidden rounded-md bg-espresso/5 cursor-pointer"
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
+                      onClick={() => setZoomImage({ src: img, alt: `${activeModalCategory.title} gallery image ${idx + 1}` })}
                       transition={{
                         duration: 0.6,
                         delay: Math.min(idx * 0.05, 0.4),
@@ -258,6 +261,13 @@ export default function PortfolioPage() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── Reusable Image Lightbox Modal ── */}
+      <ImageLightbox
+        src={zoomImage?.src ?? null}
+        alt={zoomImage?.alt}
+        onClose={() => setZoomImage(null)}
+      />
 
     </main>
   );

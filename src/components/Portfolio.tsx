@@ -5,6 +5,7 @@ import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import { X } from "lucide-react";
 import { portfolio } from "@/config/mediaConfig";
+import ImageLightbox from "@/components/ImageLightbox";
 
 // ─── Build the categories array from mediaConfig ─────────────────
 // This is the ONLY place you need to touch if you want to rename or
@@ -43,13 +44,14 @@ const categories = [
 // ─── Component ───────────────────────────────────────────────────
 export default function Portfolio() {
   const [selectedId, setSelectedId] = useState<string | null>(null);
+  const [zoomImage, setZoomImage] = useState<{ src: string; alt: string } | null>(null);
   const active = categories.find((c) => c.id === selectedId);
 
-  // Lock background scroll while modal is open
+  // Lock background scroll while category modal is open
   useEffect(() => {
-    document.body.style.overflow = selectedId ? "hidden" : "auto";
+    document.body.style.overflow = selectedId || zoomImage ? "hidden" : "auto";
     return () => { document.body.style.overflow = "auto"; };
-  }, [selectedId]);
+  }, [selectedId, zoomImage]);
 
   return (
     <section className="bg-background py-24">
@@ -81,7 +83,7 @@ export default function Portfolio() {
                   transition={{ duration: 1.2, ease: [0.22, 1, 0.36, 1] }}
                 >
                   <Image
-                    src={category.cover}           // ← portfolio.<cat>.cover
+                    src={category.cover}
                     alt={`${category.title} photography cover`}
                     fill
                     className="object-cover"
@@ -132,12 +134,13 @@ export default function Portfolio() {
 
                 {/* CSS Columns masonry grid */}
                 <div className="columns-1 gap-6 space-y-6 sm:columns-2 md:columns-3 lg:gap-8 lg:space-y-8">
-                  {active.gallery.map((img, idx) => (   // ← portfolio.<cat>.gallery
+                  {active.gallery.map((img, idx) => (
                     <motion.div
                       key={img}
-                      className="relative overflow-hidden rounded-md bg-espresso/5"
+                      className="relative overflow-hidden rounded-md bg-espresso/5 cursor-pointer"
                       initial={{ opacity: 0, y: 30 }}
                       animate={{ opacity: 1, y: 0 }}
+                      onClick={() => setZoomImage({ src: img, alt: `${active.title} gallery image ${idx + 1}` })}
                       transition={{
                         duration: 0.6,
                         delay: Math.min(idx * 0.05, 0.4),
@@ -149,7 +152,7 @@ export default function Portfolio() {
                         alt={`${active.title} gallery image ${idx + 1}`}
                         width={800}
                         height={1200}
-                        className="h-auto w-full object-cover transition-transform duration-700 hover:scale-[1.02]"
+                        className="h-auto w-full object-cover transition-transform duration-700 hover:scale-[1.03]"
                         sizes="(max-width: 640px) 100vw, (max-width: 768px) 50vw, 33vw"
                       />
                     </motion.div>
@@ -161,6 +164,13 @@ export default function Portfolio() {
           </motion.div>
         )}
       </AnimatePresence>
+
+      {/* ── Reusable Image Lightbox Modal ── */}
+      <ImageLightbox
+        src={zoomImage?.src ?? null}
+        alt={zoomImage?.alt}
+        onClose={() => setZoomImage(null)}
+      />
     </section>
   );
 }
