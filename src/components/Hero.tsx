@@ -21,18 +21,21 @@ export default function Hero() {
         ══════════════════════════════════════════════════════════ */}
         <motion.div
           className="absolute inset-0 z-0"
+          initial={{ opacity: 0, scale: 1 }}
           animate={
-            prefersReducedMotion ? { scale: 1 } : { scale: [1, 1.05, 1] }
+            prefersReducedMotion
+              ? { opacity: 1, scale: 1 }
+              : { opacity: 1, scale: [1, 1.05, 1] }
           }
-          transition={{
-            duration: 30,
-            repeat: Infinity,
-            ease: "easeInOut",
-          }}
+          transition={
+            prefersReducedMotion
+              ? { duration: 1 }
+              : { duration: 30, repeat: Infinity, ease: "linear" }
+          }
         >
           <Image
             src={hero.background}
-            alt="Beautiful cinematic photography background"
+            alt="Artful family and newborn photography background"
             fill
             priority
             quality={90}
