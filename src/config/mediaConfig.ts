@@ -163,7 +163,6 @@ export const siteMedia = {
       cover:   "/images/portfolio/milestones/milestones-cover-v2.jpg",
       gallery: [
         "/images/portfolio/milestones/milestones-1.jpg",
-        "/images/portfolio/milestones/milestones-2.jpg",
         "/images/portfolio/milestones/milestones-3.jpg",
         "/images/portfolio/milestones/milestones-4.jpg",
         "/images/portfolio/milestones/milestones-5.jpg",
