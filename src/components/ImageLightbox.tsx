@@ -79,7 +79,7 @@ export default function ImageLightbox({ src, alt = "Enlarged photo", onClose }: 
               width={1600}
               height={1200}
               priority
-              quality={95}
+              quality={90}
               className="h-auto max-h-[90vh] w-auto max-w-[90vw] rounded-lg object-contain"
             />
           </motion.div>
