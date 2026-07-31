@@ -10,7 +10,7 @@ export default function AboutExperience() {
             About the Experience
           </p>
           <h2 className="text-3xl leading-snug tracking-tight md:text-4xl lg:text-5xl">
-            Relax, breathe — I&apos;ll take care of the details for you
+            Relax, breathe, I&apos;ll take care of the details for you.
           </h2>
           <p className="mt-8 text-lg leading-relaxed text-muted md:mt-10">
             Every session is designed to feel calm, unhurried, and entirely
