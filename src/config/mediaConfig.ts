@@ -41,11 +41,10 @@ export const siteMedia = {
   // ── Hero Section ──────────────────────────────────────────────
   hero: {
     /**
-     * Cinematic full-screen background images.
-     * Ensure source files are high-res (≥ 2400 px wide) for crisp display.
+     * Cinematic full-screen background image.
+     * Ensure the source file is high-res (≥ 2400 px wide) for crisp display.
      */
     background: "/images/hero/hero-bg.jpg",
-    backgroundSecondary: "/images/hero/hero-bg-2.jpg",
   },
 
   // ── Services / Session-type cards ─────────────────────────────
