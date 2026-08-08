@@ -97,8 +97,11 @@ export default function Footer() {
           ))}
         </ul>
 
-        <p className="mt-8 font-body text-xs text-muted">
+        <p className="mt-8 font-body text-xs text-muted" suppressHydrationWarning>
           &copy; {year} Once Upon a Time Photography
+        </p>
+        <p className="mt-2 font-body text-[0.65rem] uppercase tracking-[0.25em] text-muted/60">
+          Designed and developed by Clouvent
         </p>
       </div>
     </footer>
